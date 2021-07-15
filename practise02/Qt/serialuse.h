@@ -6,6 +6,8 @@
 #include <QString>
 #include <QByteArray>
 #include <QMessageBox>
+#include <QByteArray>
+#include <QQueue>
 #include <QtSerialPort/QSerialPort>
 
 class Serialuse : public QObject
@@ -13,10 +15,12 @@ class Serialuse : public QObject
     Q_OBJECT
 public:
     Serialuse(QObject *parent = nullptr);
-    ~Serialuse();
+    ~Serialuse() override;
     QSerialPort port;
     QByteArray data;
+    QQueue<QByteArray> que;
     QString portName;
+    int baund;
     bool connected;
 signals:
     void outData(QByteArray outData);
